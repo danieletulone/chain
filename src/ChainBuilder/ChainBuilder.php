@@ -97,7 +97,7 @@ class ChainBuilder {
      * @return void
      */
     public function setOptions ($new_options) {
-        if (isArray($new_options)) {
+        if (is_array($new_options)) {
             $this->options = $new_options;
             return true;
         }

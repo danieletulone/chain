@@ -1,5 +1,9 @@
 <?php
-    $laravel_options = [
+
+namespace ChainBuilder\Options;
+
+class LaravelOptions extends Options{
+    public $options = [
         "all" => [
             "method" => "all",
             "parameters" => ""
@@ -25,4 +29,4 @@
             "parameters" => "string|string|string"
         ],
     ];
-?>
+}
