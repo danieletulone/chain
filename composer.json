@@ -12,5 +12,6 @@
     "autoload": {
         "psr-4": {"ChainBuilder\\": "src/ChainBuilder"}
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "license": "GPL-3.0"
 }
