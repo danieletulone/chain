@@ -1,0 +1,12 @@
+{
+    "name": "danieletulone/chain-builder",
+    "description": "A chain builder from get or manually.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Daniele Tulone",
+            "email": "danieletulone.work@gmail.com"
+        }
+    ],
+    "require": {}
+}
