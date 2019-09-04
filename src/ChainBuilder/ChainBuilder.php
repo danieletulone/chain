@@ -76,6 +76,11 @@ class ChainBuilder {
         return $this->getChain();
     }
 
+    /**
+     * Get the chain.
+     *
+     * @return Array An array with chain as string, chain length and get keys/values. 
+     */
     public function getChain () {
         return [
             "chain" => $this->chain,
@@ -84,6 +89,13 @@ class ChainBuilder {
         ];
     }
 
+    /**
+     * This method allow you to set options. 
+     * TODO Add a validation flow.
+     *
+     * @param [type] $new_options
+     * @return void
+     */
     public function setOptions ($new_options) {
         if (isArray($new_options)) {
             $this->options = $new_options;
