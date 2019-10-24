@@ -3,20 +3,26 @@
 namespace ChainBuilder;
 
 class ChainBuilder {
-
-    /**
-     * This array rappresent the availables options when create chain from get.
-     *
-     * @var array
-     */
+    private $chain = null;
+    private $chainLength = 0;
     private $options = [];
+    private $error = "";
 
-    public function __construct()
-    {
-        $this->chain = "";
-        $this->chain_length = 0;
-        $this->error = "";
-        $this->inputs = $_GET;
+    public function __construct($woal)
+    {   
+        $typeOfWoal = gettype($woal);
+        
+        if ($typeOfWoal == "string") {
+            if (!(in_array($woal, ["GET", "POST"]))) {
+                throw new \Exception("You are using string as woal variable. It can be 'GET' or 'POST'", 1);
+            } else {
+                $woal = $GLOBALS["_" . $woal];
+            }
+        } else if ($typeOfWoal != "array") {
+            throw new \Exception("The woal can be an array or a string ('GET' or 'POST')", 1);
+        }
+
+        $this->inputs = $woal;
     }
 
     public function add ($option, $parameters = null) {
@@ -50,7 +56,7 @@ class ChainBuilder {
         }
 
         $this->chain .= ")";
-        $this->chain_length += 1;
+        $this->chainLength += 1;
 
         return $this;
     }
@@ -58,7 +64,7 @@ class ChainBuilder {
     /**
      * Build a chain by $_GET variables.
      */
-    public function fromGet () {
+    public function build () {
 
         foreach ($this->inputs as $key => $value) {
             if (isset($this->options[$key])) {
@@ -84,7 +90,7 @@ class ChainBuilder {
     public function getChain () {
         return [
             "chain" => $this->chain,
-            "chain_length" => $this->chain_length,
+            "chainLength" => $this->chainLength,
             "inputs" => $this->inputs,
         ];
     }
@@ -96,9 +102,9 @@ class ChainBuilder {
      * @param [type] $new_options
      * @return void
      */
-    public function setOptions ($new_options) {
-        if (is_array($new_options)) {
-            $this->options = $new_options;
+    public function setOptions ($newOptions) {
+        if (is_array($newOptions)) {
+            $this->options = $newOptions;
             return true;
         }
 
