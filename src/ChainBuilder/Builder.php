@@ -42,7 +42,14 @@ class Builder {
 
             if ($requirements[$i] == "string") {
                 $this->chain .= "'" . $parameters[$i] . "'";
-            } else {
+            } else if ($requirements[$i] == "int"){
+                
+                if (!is_int($parameters[$i])) {
+                    $type = ucfirst(gettype($parameters[$i]));
+                    $this->error = "Bad inputs for {$option['method']}. Parameter at index $i must to be {$requirements[$i]}. {$type} given.";
+                    throw new Exception($this->error, 1);
+                    
+                }
                 $this->chain .= $parameters[$i];
             }
         }
@@ -58,6 +65,8 @@ class Builder {
      */
     public function build () 
     {
+        $this->chain = null;
+        $this->chainLength = 0;
 
         foreach ($this->inputs as $key => $value) {
             if (isset($this->options->getOptions()[$key])) {
@@ -105,6 +114,7 @@ class Builder {
             "chain" => $this->chain,
             "chainLength" => $this->chainLength,
             "inputs" => $this->inputs,
+            "error" => $this->error
         ];
     }
 
@@ -112,6 +122,7 @@ class Builder {
      * This method allow you to use options. 
      * TODO Add a validation flow.
      * FIXME  Add multiple arrays.
+     * TODO use Collector or Options -> instanceof
      *
      * @param [type] $new_options
      * @return void
@@ -119,5 +130,14 @@ class Builder {
     public function use ($newOptions) 
     {
         $this->options = $newOptions;
+        
+        return $this;
+    }
+
+    public function setWoal ($woal) 
+    {
+        $this->inputs = $this->checkWoal($woal);
+        
+        return $this;
     }
 }
