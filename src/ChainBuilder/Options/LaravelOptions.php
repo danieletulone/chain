@@ -4,7 +4,8 @@ namespace ChainBuilder\Options;
 
 class LaravelOptions extends Options {
 
-    public function setOptions () {
+    public function setOptions () 
+    {
         $this->addOption("all", "all");
         $this->addOption("get", "get");
         $this->addOption("pg", "paginate", "int");

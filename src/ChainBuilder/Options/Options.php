@@ -9,6 +9,8 @@ class Options {
         $this->setOptions();
     }
 
+    // TODO ADD ORDER PRIORITY
+    // TODO 
     public function addOption ($short, $methodName, $parameters = "", $ovveride = false) {
         if ($ovveride == false) {
             if (isset($this->options[$short])) {
@@ -22,11 +24,13 @@ class Options {
         ];
     }
 
+    public function getParameters ($short) {
+        return $this->options[$short]["parameters"];
+    }
+    
     public function getOptions () {
         return $this->options;
     }
 
-    public function setOptions () {
-        // Here we define options
-    }
+    public function setOptions () {}
 }

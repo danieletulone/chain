@@ -1,43 +1,35 @@
 <?php
 
-namespace ChainBuilder;
+namespace ChainBuilder; 
 
-class ChainBuilder {
+class Builder {
     private $chain = null;
     private $chainLength = 0;
-    private $options = [];
     private $error = "";
+    private $options = [];
 
-    public function __construct($woal)
+    public function __construct($woal = null)
     {   
-        $typeOfWoal = gettype($woal);
-        
-        if ($typeOfWoal == "string") {
-            if (!(in_array($woal, ["GET", "POST"]))) {
-                throw new \Exception("You are using string as woal variable. It can be 'GET' or 'POST'", 1);
-            } else {
-                $woal = $GLOBALS["_" . $woal];
-            }
-        } else if ($typeOfWoal != "array") {
-            throw new \Exception("The woal can be an array or a string ('GET' or 'POST')", 1);
-        }
-
+        $woal = $this->checkWoal($woal);
+        // TODO VALIDATE WOAL
         $this->inputs = $woal;
     }
 
-    public function add ($option, $parameters = null) {
+    public function add ($option, $parameters = null) 
+    {
+
         if (strlen($this->chain) > 0) {
             $this->chain .= "->";
         }
 
-        $this->chain .= $option["method"] . "(";
+        $this->chain .= "{$option["method"]}(";
 
         $requirements = explode("|", $option["parameters"]);
 
         $first = true;
 
         if (count($requirements) != count($parameters)) {
-            $this->error .= "Bad inputs for " . $option['method'] . ".";
+            $this->error .= "Bad inputs for {$option['method']}.";
             return false;
         }
 
@@ -64,16 +56,17 @@ class ChainBuilder {
     /**
      * Build a chain by $_GET variables.
      */
-    public function build () {
+    public function build () 
+    {
 
         foreach ($this->inputs as $key => $value) {
-            if (isset($this->options[$key])) {
-                if ($this->add($this->options[$key], explode(',', $value)) == false) {
+            if (isset($this->options->getOptions()[$key])) {
+                if ($this->add($this->options->getOptions()[$key], explode(',', $value)) == false) {
                     return [
                         "error" => $this->error,
                         "get_key" => $key,
-                        "data_given" => $_GET[$key],
-                        "expected" => $this->options[$key]
+                        "data_given" => $value,
+                        "expected" => $this->options->getParameters($key)
                     ];
                 }
             }
@@ -82,12 +75,32 @@ class ChainBuilder {
         return $this->getChain();
     }
 
+    public function checkWoal ($woal) 
+    {
+        if ($woal != null) {
+            $typeOfWoal = gettype($woal);
+        
+            if ($typeOfWoal == "string") {
+                if (!(in_array($woal, ["GET", "POST"]))) {
+                    throw new \Exception("You are using string as woal variable. It can be 'GET' or 'POST'", 1);
+                } else {
+                    return $GLOBALS["_" . $woal];
+                }
+            } else if ($typeOfWoal != "array") {
+                throw new \Exception("The woal can be an array or a string ('GET' or 'POST')", 1);
+            }
+
+            return $woal;
+        }
+    }
+
     /**
      * Get the chain.
      *
      * @return Array An array with chain as string, chain length and get keys/values. 
      */
-    public function getChain () {
+    public function getChain () 
+    {
         return [
             "chain" => $this->chain,
             "chainLength" => $this->chainLength,
@@ -96,18 +109,15 @@ class ChainBuilder {
     }
 
     /**
-     * This method allow you to set options. 
+     * This method allow you to use options. 
      * TODO Add a validation flow.
+     * FIXME  Add multiple arrays.
      *
      * @param [type] $new_options
      * @return void
      */
-    public function setOptions ($newOptions) {
-        if (is_array($newOptions)) {
-            $this->options = $newOptions;
-            return true;
-        }
-
-        return false;
+    public function use ($newOptions) 
+    {
+        $this->options = $newOptions;
     }
 }
