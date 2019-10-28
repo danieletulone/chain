@@ -1,6 +1,6 @@
 <?php
 
-namespace ChainBuilder\Options;
+namespace ChainBuilder;
 
 class Options {
     protected $options = [];
@@ -11,7 +11,7 @@ class Options {
 
     // TODO ADD ORDER PRIORITY
     // TODO 
-    public function addOption ($short, $methodName, $parameters = "", $ovveride = false) {
+    public function addOption ($short, $methodName, $parameters = "", $index = 0, $ovveride = false) {
         if ($ovveride == false) {
             if (isset($this->options[$short])) {
                 throw new \Exception("Can not ovveride option called $short.", 1);
@@ -20,7 +20,8 @@ class Options {
 
         $this->options[$short] = [
             "method" => $methodName,
-            "parameters" => $parameters
+            "parameters" => $parameters,
+            "index" => $index
         ];
     }
 

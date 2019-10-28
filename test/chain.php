@@ -14,16 +14,16 @@ $collector = new Collector();
 
 Collector::add("default-pagination", function () use ($chainBuilder) {
     return $chainBuilder
-        ->setWoal([
+        ->setWial([
             "sb" => "id,DESC", 
-            "pg" => "15", 
-            "get" => ""
+            "get" => "",
+            "pg" => "15" 
         ])->build();
 });
 
 Collector::add("larger-pagination", function () use ($chainBuilder) {
     return $chainBuilder
-        ->setWoal([
+        ->setWial([
             "sb" => "id,DESC", 
             "pg" => "50", 
             "get" => ""

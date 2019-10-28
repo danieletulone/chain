@@ -9,11 +9,11 @@ class Builder {
     private $error = "";
     private $options = [];
 
-    public function __construct($woal = null)
+    public function __construct()
     {   
-        $woal = $this->checkWoal($woal);
-        // TODO VALIDATE WOAL
-        $this->inputs = $woal;
+        // $wial = $this->checkWial($wial);
+        // // TODO VALIDATE WOAL
+        // $this->inputs = $wial;
     }
 
     public function add ($option, $parameters = null) 
@@ -83,22 +83,22 @@ class Builder {
         return $this;
     }
 
-    public function checkWoal ($woal) 
+    public function checkWial ($wial) 
     {
-        if ($woal != null) {
-            $typeOfWoal = gettype($woal);
+        if ($wial != null) {
+            $typeOfWial = gettype($wial);
         
-            if ($typeOfWoal == "string") {
-                if (!(in_array($woal, ["GET", "POST"]))) {
-                    throw new \Exception("You are using string as woal variable. It can be 'GET' or 'POST'", 1);
+            if ($typeOfWial == "string") {
+                if (!(in_array($wial, ["GET", "POST"]))) {
+                    throw new \Exception("You are using string as wial variable. It can be 'GET' or 'POST'", 1);
                 } else {
-                    return $GLOBALS["_" . $woal];
+                    return $GLOBALS["_" . $wial];
                 }
-            } else if ($typeOfWoal != "array") {
-                throw new \Exception("The woal can be an array or a string ('GET' or 'POST')", 1);
+            } else if ($typeOfWial != "array") {
+                throw new \Exception("The wial can be an array or a string ('GET' or 'POST')", 1);
             }
 
-            return $woal;
+            return $wial;
         }
     }
 
@@ -133,10 +133,20 @@ class Builder {
         return $this;
     }
 
-    public function setWoal ($woal) 
+    public function setWial ($wial) 
     {
-        $this->inputs = $this->checkWoal($woal);
+        $this->inputs = $this->checkWial($wial);
         
+        uksort($this->inputs, function ($a, $b) {
+            if ($a == $b) {
+                return 0;
+            } else if ($this->options->getOptions()[$a]['index'] > $this->options->getOptions()[$b]['index']) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+
         return $this;
     }
 }
