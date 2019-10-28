@@ -136,7 +136,16 @@ class Builder {
     public function setWial ($wial) 
     {
         $this->inputs = $this->checkWial($wial);
-        
+        $this->sortInputsByIndex();
+
+        return $this;
+    }
+
+    /**
+     * This method sorts inputs by index given in rules.
+     * The larger the index of single rule, the later the method will be concatenated.
+     */
+    public function sortInputsByIndex () {
         uksort($this->inputs, function ($a, $b) {
             if ($a == $b) {
                 return 0;
@@ -146,7 +155,5 @@ class Builder {
                 return -1;
             }
         });
-
-        return $this;
     }
 }
