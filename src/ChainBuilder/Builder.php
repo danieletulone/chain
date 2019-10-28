@@ -1,6 +1,7 @@
 <?php
 
 namespace ChainBuilder; 
+use Exception;
 
 class Builder {
     private $chain = null;
@@ -43,14 +44,12 @@ class Builder {
             if ($requirements[$i] == "string") {
                 $this->chain .= "'" . $parameters[$i] . "'";
             } else if ($requirements[$i] == "int"){
-                
-                if (!is_int($parameters[$i])) {
-                    $type = ucfirst(gettype($parameters[$i]));
-                    $this->error = "Bad inputs for {$option['method']}. Parameter at index $i must to be {$requirements[$i]}. {$type} given.";
-                    throw new Exception($this->error, 1);
-                    
-                }
-                $this->chain .= $parameters[$i];
+                // if (!is_int($parameters[$i])) {
+                //     $type = ucfirst(gettype($parameters[$i]));
+                //     $this->error = "Bad inputs for {$option['method']}. Parameter at index $i must to be {$requirements[$i]}. {$type} given.";
+                //     throw new Exception($this->error, 1);    
+                // }
+                $this->chain .= intval($parameters[$i]);
             }
         }
 
@@ -81,7 +80,7 @@ class Builder {
             }
         }
 
-        return $this->getChain();
+        return $this;
     }
 
     public function checkWoal ($woal) 

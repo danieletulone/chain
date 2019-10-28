@@ -11,8 +11,23 @@ $laravelOptions = new LaravelOptions();
 $chainBuilder->use($laravelOptions);
 
 $collector = new Collector();
-$collector->add("from-get", $chainBuilder->build());
 
-$collector->add("default-pagination", $chainBuilder->setWoal(["pg" => "15a", "get" => ""])->build());
+Collector::add("default-pagination", function () use ($chainBuilder) {
+    return $chainBuilder
+        ->setWoal([
+            "sb" => "id,DESC", 
+            "pg" => "15", 
+            "get" => ""
+        ])->build();
+});
+
+Collector::add("larger-pagination", function () use ($chainBuilder) {
+    return $chainBuilder
+        ->setWoal([
+            "sb" => "id,DESC", 
+            "pg" => "50", 
+            "get" => ""
+        ])->build();
+});
 
 echo json_encode($collector->getAll());
