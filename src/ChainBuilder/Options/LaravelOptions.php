@@ -7,11 +7,22 @@ class LaravelOptions extends Options {
 
     public function setOptions () 
     {
+        // 4 
+        $this->addOption("sb", "sortBy", "string|string", 4);
+        
+        // 5
+        $this->addOption("w", "where", "string|string|string", 5);
+        $this->addOption("f", "find", "int", 5);
+        
+        // 6
+        $this->addOption("pg", "paginate", "int", 6);
+
+        // 10
         $this->addOption("all", "all", "", 10);
         $this->addOption("get", "get", "", 10);
-        $this->addOption("pg", "paginate", "int", 6);
-        $this->addOption("sb", "sortBy", "string|string", 4);
+        
+        // 11
         $this->addOption("tk", "take", "int", 11);
-        $this->addOption("w", "where", "string|string|string", 5);
+        $this->addOption("tkf", "first", "", 11);
     }
 }

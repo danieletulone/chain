@@ -30,4 +30,12 @@ Collector::add("larger-pagination", function () use ($chainBuilder) {
         ])->build();
 });
 
+Collector::add("take-first", function () use ($chainBuilder) {
+    return $chainBuilder
+        ->setWial([
+            "tk" => 1,
+            "w" => "id,=,$id",
+        ])->build();
+});
+
 echo json_encode($collector->getAll());
