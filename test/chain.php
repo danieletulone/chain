@@ -2,11 +2,11 @@
 
 require ('../vendor/autoload.php');
 
-use ChainBuilder\Builder as ChainBuilder;
-use ChainBuilder\Options\LaravelOptions;
-use ChainBuilder\Collector as ChainCollector;
+use Chain\Builder as ChainBuilder;
+use Chain\Options\LaravelOptions;
+use Chain\Collector as ChainCollector;
 
-$chainBuilder = new ChainBuilder("GET");
+$chainBuilder = new ChainBuilder();
 $laravelOptions = new LaravelOptions();
 $chainBuilder->use($laravelOptions);
 
@@ -27,13 +27,5 @@ ChainCollector::add("larger-pagination", function () use ($chainBuilder) {
             "get" => ""
         ])->build();
 });
-
-// Collector::add("take-first-{id}", function ($id) use ($chainBuilder) {
-//     return $chainBuilder
-//         ->setWial([
-//             "tk" => 1,
-//             "w" => "id,=,$id",
-//         ])->build();
-// });
 
 echo json_encode(ChainCollector::getAll());

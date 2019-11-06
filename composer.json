@@ -11,7 +11,7 @@
     "require": {
     },
     "autoload": {
-        "psr-4": {"ChainBuilder\\": "src/ChainBuilder"}
+        "psr-4": {"Chain\\": "src/Chain"}
     },
     "minimum-stability": "dev",
     "license": "GPL-3.0"

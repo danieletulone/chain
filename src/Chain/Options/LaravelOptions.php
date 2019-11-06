@@ -1,7 +1,7 @@
 <?php
 
-namespace ChainBuilder\Options;
-use ChainBuilder\Options;
+namespace Chain\Options;
+use Chain\Options;
 
 class LaravelOptions extends Options {
 

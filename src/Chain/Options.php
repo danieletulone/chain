@@ -1,6 +1,6 @@
 <?php
 
-namespace ChainBuilder;
+namespace Chain;
 
 class Options {
     protected $options = [];

@@ -1,6 +1,7 @@
 <?php
 
-namespace ChainBuilder; 
+namespace Chain;
+
 use Exception;
 
 class Builder {
@@ -59,9 +60,6 @@ class Builder {
         return $this;
     }
 
-    /**
-     * Build a chain by $_GET variables.
-     */
     public function build () 
     {
         $this->chain = null;
@@ -118,10 +116,7 @@ class Builder {
     }
 
     /**
-     * This method allow you to use options. 
-     * TODO Add a validation flow.
-     * FIXME  Add multiple arrays.
-     * TODO use Collector or Options -> instanceof
+     * This method allow you to use options.
      *
      * @param [type] $new_options
      * @return void
