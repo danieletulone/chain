@@ -4,15 +4,13 @@ require ('../vendor/autoload.php');
 
 use ChainBuilder\Builder as ChainBuilder;
 use ChainBuilder\Options\LaravelOptions;
-use ChainBuilder\Collector;
+use ChainBuilder\Collector as ChainCollector;
 
 $chainBuilder = new ChainBuilder("GET");
 $laravelOptions = new LaravelOptions();
 $chainBuilder->use($laravelOptions);
 
-$collector = new Collector();
-
-Collector::add("default-pagination", function () use ($chainBuilder) {
+ChainCollector::add("default-pagination", function () use ($chainBuilder) {
     return $chainBuilder
         ->setWial([
             "sb" => "id,DESC", 
@@ -21,7 +19,7 @@ Collector::add("default-pagination", function () use ($chainBuilder) {
         ])->build();
 });
 
-Collector::add("larger-pagination", function () use ($chainBuilder) {
+ChainCollector::add("larger-pagination", function () use ($chainBuilder) {
     return $chainBuilder
         ->setWial([
             "sb" => "id,DESC", 
@@ -30,12 +28,12 @@ Collector::add("larger-pagination", function () use ($chainBuilder) {
         ])->build();
 });
 
-Collector::add("take-first", function () use ($chainBuilder) {
-    return $chainBuilder
-        ->setWial([
-            "tk" => 1,
-            "w" => "id,=,$id",
-        ])->build();
-});
+// Collector::add("take-first-{id}", function ($id) use ($chainBuilder) {
+//     return $chainBuilder
+//         ->setWial([
+//             "tk" => 1,
+//             "w" => "id,=,$id",
+//         ])->build();
+// });
 
-echo json_encode($collector->getAll());
+echo json_encode(ChainCollector::getAll());
