@@ -1,6 +1,6 @@
 {
-    "name": "danieletulone/chain",
-    "description": "Create and execute chains of methods.",
+    "name": "danieletulone/chain-builder",
+    "description": "A chain builder from get or manually.",
     "type": "library",
     "authors": [
         {

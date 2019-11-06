@@ -2,14 +2,11 @@
 
 require ('../vendor/autoload.php');
 
-// Use Builder, Collector, Options and LaravelOptions
 use Chain\Builder as ChainBuilder;
-use Chain\Collector as ChainCollector;
-use Chain\Options as ChainOptions;
 use Chain\Options\LaravelOptions;
+use Chain\Collector as ChainCollector;
 
 $chainBuilder = new ChainBuilder();
-$chainBuilderExample = new ChainBuilder();
 $laravelOptions = new LaravelOptions();
 $chainBuilder->use($laravelOptions);
 
