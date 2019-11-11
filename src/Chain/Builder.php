@@ -10,16 +10,8 @@ class Builder {
     private $error = "";
     private $options = [];
 
-    public function __construct()
-    {   
-        // $wial = $this->checkWial($wial);
-        // // TODO VALIDATE WOAL
-        // $this->inputs = $wial;
-    }
-
     public function add ($option, $parameters = null) 
     {
-
         if (strlen($this->chain) > 0) {
             $this->chain .= "->";
         }

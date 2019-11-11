@@ -2,7 +2,11 @@
 
 namespace Chain;
 
+/**
+ * This class will be used to execute a chain of methods built with Chain\Builder.
+ */
 class Executor {
+
     /**
      * A recursive method to run a chain by string
      *
