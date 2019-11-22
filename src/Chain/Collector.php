@@ -8,7 +8,8 @@ use Chain\Builder;
  * This class is collector of built chains.
  * @author Daniele Tulone
  */
-class Collector {
+class Collector 
+{
 
     /**
      * This array contains all built chains.
@@ -70,7 +71,8 @@ class Collector {
     /**
      * Get the variables for matcher. Not in use yet.
      */
-    public static function getVariables ($string) {
+    public static function getVariables ($string) 
+    {
         $variables = null;
         \preg_match_all("/{(.*)}/", $string, $variables);
 

@@ -5,8 +5,8 @@ namespace Chain;
 /**
  * This class will be used to execute a chain of methods built with Chain\Builder.
  */
-class Executor {
-
+class Executor 
+{
     /**
      * A recursive method to run a chain by string
      *
@@ -51,7 +51,8 @@ class Executor {
     /**
      * This method split a chain in array.
      */
-    public static function split ($chain_as_string) {
+    public static function split ($chain_as_string) 
+    {
         return preg_split('{->|::}', $chain_as_string);
     }
 }

@@ -6,10 +6,12 @@ namespace Chain;
  * This class rappresents a collections of options. 
  * It will be used with Chain\Builder class.
  */
-class Options {
+class Options 
+{
     protected $options = [];
 
-    public function __construct () {
+    public function __construct () 
+    {
         $this->setOptions();
     }
 
@@ -18,7 +20,8 @@ class Options {
      * 
      * @return void
      */
-    public function addOption ($short, $methodName, $parameters = "", $index = 0, $ovveride = false) {
+    public function addOption ($short, $methodName, $parameters = "", $index = 0, $ovveride = false) 
+    {
         if ($ovveride == false) {
             if (isset($this->options[$short])) {
                 throw new \Exception("Can not ovveride option called $short.", 1);
@@ -35,7 +38,8 @@ class Options {
     /**
      * This method get parameters of option with short value given.
      */
-    public function getParameters ($short) {
+    public function getParameters ($short) 
+    {
         return $this->options[$short]["parameters"];
     }
     
@@ -44,7 +48,8 @@ class Options {
      * 
      * @return Array array as options.
      */
-    public function getOptions () {
+    public function getOptions () 
+    {
         return $this->options;
     }
 
@@ -53,5 +58,8 @@ class Options {
      * 
      * @return void
      */
-    public function setOptions () {}
+    public function setOptions () 
+    {
+        //
+    }
 }

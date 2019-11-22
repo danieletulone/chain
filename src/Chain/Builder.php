@@ -4,7 +4,9 @@ namespace Chain;
 
 use Exception;
 
-class Builder {
+class Builder 
+{
+
     private $chain = null;
     private $chainLength = 0;
     private $error = "";
@@ -132,7 +134,8 @@ class Builder {
      * This method sorts inputs by index given in rules.
      * The larger the index of single rule, the later the method will be concatenated.
      */
-    public function sortInputsByIndex () {
+    public function sortInputsByIndex () 
+    {
         uksort($this->inputs, function ($a, $b) {
             if ($a == $b) {
                 return 0;
