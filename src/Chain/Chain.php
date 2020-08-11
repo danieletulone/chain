@@ -16,7 +16,7 @@ class Chain
 
     public static function create(string $name, array $inputs)
     {
-        $option = new Chain($name, $inputs);
+        $chain = new Chain($name, $inputs);
         
         return Ford::addChain($chain, $inputs);
     }
