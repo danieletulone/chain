@@ -1,31 +1,59 @@
 <?php
 
 namespace Chain\Options;
-use Chain\Options;
 
-class LaravelOptions extends Options {
+use Chain\Option;
+use Chain\OptionManager;
 
-    public function setOptions () 
+class LaravelOptions extends OptionManager
+{
+    /**
+     * @inherited
+     */
+    public static function import(): void
     {
         // 4
-        $this->addOption("sb", "sortBy", "string|string", 4);
-        
+        Option::create("sb", "sortBy")
+                ->addArgument('string')
+                ->addArgument('string')
+                ->setIndex(4);
+
         // 5
-        $this->addOption("w", "where", "string|string|string", 5);
-        $this->addOption("f", "find", "int", 5);
+        Option::create('w', 'where')
+              ->addArgument('string')
+              ->addArgument('string')
+              ->addArgument('string')
+              ->setIndex(5);
         
+        Option::create('f', 'find')
+              ->addArgument('string')
+              ->addArgument('string')
+              ->addArgument('string')
+              ->setIndex(5);
+
         // 7
-        $this->addOption("with", "with", "string", 8);
+        Option::create('with', 'with')
+              ->addArgument('string')
+              ->setIndex(8);
 
         // 8
-        $this->addOption("pg", "paginate", "int", 8);
+        Option::create('pg', 'paginate')
+              ->addArgument('integer')
+              ->setIndex(8);
 
         // 10
-        $this->addOption("all", "all", "", 10);
-        $this->addOption("get", "get", "", 10);
+        Option::create('all', 'all')
+              ->setIndex(10);
+
+        Option::create('get', 'get')
+              ->setIndex(10);
         
         // 11
-        $this->addOption("tk", "take", "int", 11);
-        $this->addOption("tkf", "first", "", 11);
+        Option::create('tk', 'take')
+              ->addArgument('integer')
+              ->setIndex(11);
+
+        Option::create('first', 'first')
+              ->setIndex(11);
     }
 }
