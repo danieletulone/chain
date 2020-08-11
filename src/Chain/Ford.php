@@ -10,11 +10,11 @@ class Ford
 
     private $options = [];
 
-    private $chains = [];
-
     private $object = null;
 
-    public function run(mixed $what = null)
+    private $chains = [];
+
+    public function run($what = null)
     {
         if (($result = self::getInstance()->object) == null) {
             throw new Exception('You must specify the object who use current chain.');
