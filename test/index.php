@@ -17,7 +17,7 @@ class A
 
     public function get()
     {
-        echo "get <br>";
+        echo "get";
 
         return $this;
     }
@@ -29,9 +29,9 @@ $sortByOption = Option::create('sb', 'sortBy', 5)->addArgument('string');
 
 $getOption = Option::create('g', 'get');
 
-$chain = Chain::create('base-get');
-
-Ford::on($a)->run([
+$chain = Chain::create('base-get', [
     'sb' => 'ciao',
-    'g' => '',
+    'g' => ''
 ]);
+
+Ford::on($a)->run('base-get');
